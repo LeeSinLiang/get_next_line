@@ -90,7 +90,8 @@ int	main(void)
 }
 
 ```
-Run with `cc main.c get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=<insert buffer size of choice here>
+Run with `cc main.c get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=<insert buffer size of choice here>`.
+
 In this example, the `get_next_line` function is called in a loop until the end of file is reached or an error occurs. Each line is processed within the loop, and the memory allocated for each line is freed.
 
 ## Contributing
