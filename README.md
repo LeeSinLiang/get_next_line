@@ -21,7 +21,7 @@
 
 ## Introduction
 
-The `get_next_line` function is a useful tool when you need to read a file line by line, especially when dealing with large files or input from the standard input. It eliminates the need to read the entire file into memory, allowing you to process the file content incrementally.
+The `get_next_line` function is a useful tool when you need to read a file line by line, especially when dealing with large files or input from the standard input. It eliminates the need to read the entire file into memory, allowing you to process the file content incrementally. Furthermore, it can manage multiple file descriptors at the same time.
 
 ## Installation
 
