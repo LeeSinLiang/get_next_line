@@ -1,19 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sinlee <sinlee@student42.fr>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 14:30:35 by sinlee            #+#    #+#             */
-/*   Updated: 2023/05/31 10:26:30 by sinlee           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*extract_and_return(char *str, int mode, char *remain_str)
+char	*extract_and_ret(char *str, int mode, char *remain_str)
 {
 	int		index;
 	char	*extract;
@@ -46,23 +34,23 @@ char	*get_next_line(int fd)
 {
 	int			read_size;
 	char		*buffer;
-	static char	*remain;
+	static char	*remain[1024];
 	char		*buff_all;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	read_size = 1;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	buff_all = extract_and_return(remain, 0, remain);
-	remain = extract_and_return(remain, 2, remain);
+	buff_all = extract_and_ret(remain[fd], 0, remain[fd]);
+	remain[fd] = extract_and_ret(remain[fd], 2, remain[fd]);
 	while (ft_strchr(buff_all, '\n') == -1 && read_size != 0)
 	{
 		read_size = read(fd, buffer, BUFFER_SIZE);
 		if (read_size <= 0)
 			break ;
 		buffer[read_size] = '\0';
-		buff_all = ft_strjoin(buff_all, extract_and_return(buffer, 0, remain));
-		remain = extract_and_return(buffer, 1, remain);
+		buff_all = ft_strjoin(buff_all, extract_and_ret(buffer, 0, remain[fd]));
+		remain[fd] = extract_and_ret(buffer, 1, remain[fd]);
 	}
 	free(buffer);
 	return (buff_all);
